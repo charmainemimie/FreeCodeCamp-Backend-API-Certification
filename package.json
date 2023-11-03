@@ -1,6 +1,8 @@
 {
 	"name": "fcc-learn-npm-package-json",
 	"author": "Charmaine Mangorima",
+	"description": "My Backend & API Certification",
+	"keywords": [ "freecodecamp", "api", "backend" ],
 	"dependencies": {
 		"express": "^4.14.0"
 	},
