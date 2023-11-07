@@ -54,6 +54,16 @@ const queryChain = (done) => {
   done(null /*, data*/);
 };
 
+const personSchema =mongoose.Schema({
+  name:{
+    type:String,
+    required:true
+  },
+  age:Number,
+  favoriteFoods:[String]
+});
+
+Person = mongoose.model('Person',personSchema);
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
