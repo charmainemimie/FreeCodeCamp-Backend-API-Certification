@@ -136,10 +136,17 @@ const removeById = (personId, done) => {
   );
 };
 
+//Delete Many Documents with model.remove()
+//The Model.remove() doesn’t return the deleted document,
+// but a JSON object containing the outcome of the operation, 
+//and the number of items affected.
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove}, (err, response) => {
+    if(err) return console.log(err);
+    done(null, response);
+  })
 };
 
 const queryChain = (done) => {
