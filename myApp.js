@@ -149,10 +149,20 @@ const removeManyPeople = (done) => {
   })
 };
 
+//Chain Search Query Helpers to Narrow Search Results
 const queryChain = (done) => {
-  const foodToSearch = "burrito";
+ 
 
-  done(null /*, data*/);
+ 
+    var foodToSearch = "burrito";
+    Person.find({favoriteFoods:foodToSearch}).sort({ name: 1 }).limit(2).select('-age').exec((err,data) =>{   
+     
+      err ? done(err): done(null, data);
+      
+    })
+    
+  
+  
 };
 
 const personSchema =mongoose.Schema({
