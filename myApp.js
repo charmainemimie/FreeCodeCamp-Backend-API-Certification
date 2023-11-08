@@ -1,12 +1,28 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 //mongoose.connect(process.env.MONGO_URI);
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//family:4 .....to tell mongo to use IPV4 because it's IPV6 by default
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, family: 4,});
 
 let Person;
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  //creating the document
+  let mimie = new Person({
+    name : "Mimie",
+    age:25,
+    favoriteFoods:["Sadza", "Rice", "Pizza"]
+  });
+  
+  mimie.save((error,data)=>{
+      if(error){
+        return console.log(error)
+      }
+      else{
+        done(null , data);
+      }
+  })
+  
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
