@@ -6,6 +6,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 let Person;
 
+//Create and Save a Record of a Model
 const createAndSavePerson = (done) => {
   //creating the document
   let mimie = new Person({
@@ -33,7 +34,7 @@ var arrayOfPeople = [
   {name: "Robert", age: 78, favoriteFoods: ["wine"]}
 ];
 
-//creating many documents
+//creating many documents / Create Many Records with model.create()
 const createManyPeople = (arrayOfPeople, done) => {
 
   Person.create(arrayOfPeople, function (err, people) {
@@ -45,7 +46,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 
-//fetching records from db
+//Use model.find() to Search Your Database
 const findPeopleByName = (personName, done) => {
 /*   Person.find({
     name: personName // search query
@@ -67,7 +68,7 @@ const findPeopleByName = (personName, done) => {
   });
 };
 
-//find one specific record(unique)
+//Use model.findOne() to Return a Single Matching Document from Your Database
 const findOneByFood = (food, done) => {
   Person.findOne({
       favoriteFoods:food
@@ -79,9 +80,15 @@ const findOneByFood = (food, done) => {
 
   
 };
-
+//Use model.findById() to Search Your Database By _id
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById({
+    _id:personId
+},
+function (err, personFound) {
+  if (err) return console.log(err);
+  done(null, personFound);
+});
 };
 
 const findEditThenSave = (personId, done) => {
